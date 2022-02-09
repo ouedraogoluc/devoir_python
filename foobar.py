@@ -15,7 +15,7 @@ class DitSeries:
         - La valeur du Dictionnaire est de n'importe quel type"""
         self.name=name
         self.data=data
-        self.ds={name:{data}}
+        self.ds={name:[data]}
     
         
 
@@ -25,7 +25,7 @@ class DitSeries:
         - La valeur renvoyée est de type DitSeries
         - Chaque élément de la série est multiplié par l'argument
         """
-        return self.data==other*ds
+        return mul(other,ds)
         
 
 
@@ -55,7 +55,7 @@ class DitSeries:
 
     def __getitem__(self, key: "DitSeries") -> "DitSeries":
         """ """
-
+        
     def __repr__(self) -> str:
         """ Affiche une representation de l'objet DitSeries. """
         return f"<DitSeries: {self.name} {self.data}>"
@@ -75,7 +75,7 @@ class DitDataFrame:
         """
         self.series_map=d[0]
         self.length=d[1]
-        self.df={}
+        self.df={d}
         
 
 
