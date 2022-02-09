@@ -1,3 +1,5 @@
+from audioop import mul
+from os import O_SEQUENTIAL
 import typing as t
 
 
@@ -5,11 +7,17 @@ class DitSeries:
     """ """
 
     def __init__(self, name: str, data: t.Dict[int, t.Any]):
+        
         """ Constructeur qui reçoit:
         - le nom d'une colonne
         - le contenu de la colonne sous forme de Dictionnaire
         - La clé du Dictionnaire est un entier
         - La valeur du Dictionnaire est de n'importe quel type"""
+        self.name=name
+        self.data=data
+        self.ds={name:{data}}
+    
+        
 
     def __mul__(self, other: int) -> "DitSeries":
         """ Implementation de l'opération de multiplication.
@@ -17,6 +25,9 @@ class DitSeries:
         - La valeur renvoyée est de type DitSeries
         - Chaque élément de la série est multiplié par l'argument
         """
+        return self.data==other*ds
+        
+
 
     def __div__(self, other: int) -> "DitSeries":
         """ Implementation de l'opération de division.
@@ -24,16 +35,23 @@ class DitSeries:
         - La valeur renvoyée est de type DitSeries
         - Chaque élément de la série est divisé par l'argument
         """
+        return self.data==other/ds
+
 
     def __sub__(self, other: int) -> "DitSeries":
         """Soustraction """
+        return self.data==other-ds
 
 
     def __add__(self, other: int) -> "DitSeries":
         """Addition"""
+        return self.data==other+ds
+
 
     def __gt__(self, other: int) -> "DitSeries":
         """Comparaison (supérieur) """
+        return self.data==other >ds
+
 
     def __getitem__(self, key: "DitSeries") -> "DitSeries":
         """ """
@@ -50,11 +68,15 @@ class DitDataFrame:
         - un dictionnaire
         - la clé du dictionnaire est une chaine de caractère
         - la valeur du dictionnaire est une liste contenant des elements de n'importe quel type
-
+        
         - les attributs initialisés seront:
         - self.series_map, correspondra à un dictionnaire de type DitSeries
         - self.length, la longueur du DataFrame
         """
+        self.series_map=d[0]
+        self.length=d[1]
+        self.df={}
+        
 
 
     def __getitem__(self, key: str) -> DitSeries:
